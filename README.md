@@ -100,7 +100,8 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 # on your HTTPS website to help prevent man-in-the-middle attacks.
 # See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security
 <IfModule mod_headers.c>
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    # Remove "includeSubDomains" if you don't want to enforce HSTS on all subdomains
+    Header always set Strict-Transport-Security "max-age=31536000;includeSubDomains"
 </IfModule>
 ```
 
@@ -153,7 +154,7 @@ RewriteEngine On
 RewriteRule ^source-directory/(.*) /target-directory/$1 [R=301,L]
 ```
 
-### Alias Paths To Script
+### Alias Paths to Script
 ``` apacheconf
 FallbackResource /index.fcgi
 ```
